@@ -1,0 +1,19 @@
+{
+	"geode": "5.3.0",
+	"gd": {
+		"win": "2.2081"
+	},
+	"id": "benjamin538.ardugd",
+	"name": "ArduGD",
+	"version": "v1.0.0",
+	"developer": "benjamin538",
+	"description": "Arduino in gd real",
+	"dependencies": {
+		"geode.node-ids": ">=v1.20.0"
+	},
+	"resources": {
+		"spritesheets": {
+			"1": ["resources/*.png"]
+		}
+	}
+}
