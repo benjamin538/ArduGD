@@ -5,8 +5,9 @@
 	},
 	"id": "benjamin538.ardugd",
 	"name": "ArduGD",
-	"version": "v1.0.0",
+	"version": "1.0.0",
 	"developer": "benjamin538",
+	"tags": ["api", "utility", "offline"],
 	"description": "Arduino in gd real",
 	"dependencies": {
 		"geode.node-ids": ">=v1.20.0"
