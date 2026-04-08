@@ -29,8 +29,13 @@ class $modify(menuLayer, MenuLayer) {
             geode::createQuickPopup("Wait!", "You have <cr>opened port</c>. Close it?", "Yes", "No",
             [this, sender](bool btn1, auto){
                 if (btn1) {
-                    Arduino::close();
-                    geode::utils::game::exit(true);
+                    // thread again
+                    std::thread([this, sender](){
+                        Arduino::close();
+                        Loader::get()->queueInMainThread([this, sender](){
+                            MenuLayer::onQuit(sender);
+                        });
+                    }).detach();
                 }
             });
         } else {

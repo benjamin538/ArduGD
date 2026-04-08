@@ -12,6 +12,7 @@ protected:
         auto winSize = CCDirector::get()->getWinSize();
         if (!Popup::init(winSize.width - 50.f, winSize.height - 50.f)) return false;
         this->setTitle("Serial Port Monitor");
+        this->setID("serial-monitor");
         // clear
         auto clear = CCMenuItemSpriteExtra::create(CCSprite::createWithSpriteFrameName("GJ_deleteBtn_001.png"), this, menu_selector(SerialPortMonitor::clearSerial));
         // send
@@ -21,6 +22,7 @@ protected:
         // input
         auto input = TextInput::create(m_mainLayer->getContentWidth() / 2, "Enter message here...", "bigFont.fnt");
         input->setID("input");
+        input->setFilter(" !#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~");
         // scroll
         auto scroll = ScrollLayer::create({winSize.width - 200, winSize.height - 150});
         scroll->setPosition({50, 25});
@@ -40,12 +42,20 @@ protected:
         m_buttonMenu->addChildAtPosition(copy, Anchor::TopRight, {-50, -50});
         // logic
         if (!Arduino::isOpened()) return true;
-        std::thread([this, content, scroll](){
+        std::thread([this](){
             while (m_listening) {
                 std::string data = Arduino::read();
                 if (data.empty()) continue;
-                Loader::get()->queueInMainThread([this, data, content, scroll](){
-                    if (!m_listening) return;
+                Loader::get()->queueInMainThread([data](){
+                    // i didnt come up with better solution
+                    auto scene = CCDirector::get()->getRunningScene();
+                    auto popup = typeinfo_cast<SerialPortMonitor*>(scene->getChildByID("serial-monitor"));
+                    if (!popup) return;
+                    auto mainLayer = popup->m_mainLayer;
+                    if (!mainLayer) return;
+                    auto scroll = typeinfo_cast<ScrollLayer*>(mainLayer->getChildByID("scroll"));
+                    auto content = typeinfo_cast<CCLabelBMFont*>(scroll->m_contentLayer->getChildByID("content"));
+                    if (!content || !scroll) return;
                     std::string text = std::string(content->getString());
                     content->setString((text + data).c_str());
                     content->setPositionY(scroll->m_contentLayer->getContentHeight());
@@ -53,7 +63,7 @@ protected:
                     scroll->m_contentLayer->setPositionY(0.f);
                 });
             }
-        }).detach();  
+        }).detach();
         return true;
     }
 
@@ -64,6 +74,7 @@ protected:
     }
 
     void onClose(CCObject* sender) {
+        log::info("closed monitor");
         m_listening = false;
         geode::Popup::onClose(sender);
     }

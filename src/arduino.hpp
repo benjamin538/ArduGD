@@ -58,8 +58,11 @@ public:
             return FALSE;
         }
         COMMTIMEOUTS timeouts = {0};
-        timeouts.ReadIntervalTimeout = MAXDWORD;
-        timeouts.ReadTotalTimeoutConstant = 0;
+        timeouts.ReadIntervalTimeout = 20;
+        timeouts.ReadTotalTimeoutMultiplier = 1;
+        timeouts.ReadTotalTimeoutConstant = 50;
+        timeouts.WriteTotalTimeoutConstant = 50;
+        timeouts.WriteTotalTimeoutMultiplier = 1;
         SetCommTimeouts(hComm, &timeouts);
         DCB dcbStruct = {0};
         dcbStruct.BaudRate = baudRate;
@@ -110,28 +113,15 @@ public:
     }
     
     /*reads port and returns bytes
-    max size of buffer is 128 bytes, you cant complain about it*/
+    max size of buffer is 1024 bytes, you cant complain about it*/
     static std::string read() {
         if (hComm != INVALID_HANDLE_VALUE) {
-            DWORD eventMask;
             DWORD bytesRead;
-            char buff[128] = {0};
-            BOOL status = SetCommMask(hComm, EV_RXCHAR);
-            if (!status) {
-                log::error("failed to set mask");
-                return "";
-            }
-            status = WaitCommEvent(hComm, &eventMask, NULL);
-            if (status) {
-                if (eventMask && EV_RXCHAR) {
-                    ReadFile(hComm, buff, sizeof(buff) - 1, &bytesRead, NULL);
-                    if (bytesRead > 0) {
-                        return std::string(buff, bytesRead);
-                    } else return "";
-                }
-            } else {
-                log::error("wait failure");
-                return "";
+            char buff[1024] = {0};
+            BOOL success = ReadFile(hComm, buff, sizeof(buff), &bytesRead, NULL);
+            if (bytesRead > 0) {
+                log::info("got bytes");
+                return std::string(buff);
             }
         } else {
             log::error("cant read non opened port");

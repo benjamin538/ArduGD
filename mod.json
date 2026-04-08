@@ -6,6 +6,10 @@
 	"id": "benjamin538.ardugd",
 	"name": "ArduGD",
 	"version": "v1.0.0",
+	"links": {
+		"source": "https://github.com/benjamin538/ArduGD",
+		"community": "https://discord.gg/V9CRqXA2E9"
+	},
 	"developer": "benjamin538",
 	"description": "Arduino in gd real",
 	"dependencies": {
