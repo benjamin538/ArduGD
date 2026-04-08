@@ -5,15 +5,11 @@
 	},
 	"id": "benjamin538.ardugd",
 	"name": "ArduGD",
-<<<<<<< HEAD
 	"version": "v1.1.0",
 	"links": {
 		"source": "https://github.com/benjamin538/ArduGD",
 		"community": "https://discord.gg/V9CRqXA2E9"
 	},
-=======
-	"version": "1.0.0",
->>>>>>> db9105f97da0eb6629224be1f4a2d54b6b2a4ce8
 	"developer": "benjamin538",
 	"tags": ["api", "utility", "offline"],
 	"description": "Arduino in gd real",
