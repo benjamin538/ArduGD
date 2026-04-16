@@ -1,5 +1,10 @@
 # ArduGD
 
+![Mod Version](https://api.geode-sdk.org/v1/mods/benjamin538.ardugd/status_badge?stat=version)
+![Downloads](https://api.geode-sdk.org/v1/mods/benjamin538.ardugd/status_badge?stat=downloads)
+![GD Version](https://api geode-sdk.org/v1/mods/benjamin538.ardugd/status_badge?stat=gd_version)
+![Geode Version](https://api.geode-sdk.org/v1/mods/benjamin538.ardugd/status_badge?stat=geode_version)
+
 Mod that provides support for Arduino / ESP right in game!
 
 **Windows only!**
