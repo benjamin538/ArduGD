@@ -1,21 +1,18 @@
 {
-	"geode": "5.3.0",
+	"geode": "5.7.1",
 	"gd": {
 		"win": "2.2081"
 	},
 	"id": "benjamin538.ardugd",
 	"name": "ArduGD",
-	"version": "v1.1.0",
+	"version": "v1.1.1",
 	"links": {
 		"source": "https://github.com/benjamin538/ArduGD",
 		"community": "https://discord.gg/V9CRqXA2E9"
 	},
 	"developer": "benjamin538",
-	"tags": ["api", "utility", "offline"],
+	"tags": ["developer", "utility", "offline"],
 	"description": "Arduino in gd real",
-	"dependencies": {
-		"geode.node-ids": ">=v1.20.0"
-	},
 	"resources": {
 		"spritesheets": {
 			"1": ["resources/*.png"]

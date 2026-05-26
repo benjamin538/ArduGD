@@ -46,8 +46,7 @@ protected:
         auto closeButton = CCMenuItemSpriteExtra::create(closeSpr, this, menu_selector(SettingsPopup::close));
         closeButton->setID("close-button");
         // serial button
-        auto terminalSprite = CCSprite::createWithSpriteFrameName("serialconsole.png"_spr);
-        terminalSprite->setScale(0.5f);
+        auto terminalSprite = CircleButtonSprite::createWithSpriteFrameName("serialconsole.png"_spr);
         auto serialButton = CCMenuItemSpriteExtra::create(terminalSprite, this, menu_selector(SettingsPopup::openSerialMonitor));
         serialButton->setID("serial-button");
         //  adding

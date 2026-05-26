@@ -14,11 +14,13 @@ protected:
         this->setTitle("Serial Port Monitor");
         this->setID("serial-monitor");
         // clear
-        auto clear = CCMenuItemSpriteExtra::create(CCSprite::createWithSpriteFrameName("GJ_deleteBtn_001.png"), this, menu_selector(SerialPortMonitor::clearSerial));
+        auto clearSprite = CircleButtonSprite::createWithSpriteFrameName("serialclear.png"_spr);
+        auto clear = CCMenuItemSpriteExtra::create(clearSprite, this, menu_selector(SerialPortMonitor::clearSerial));
         // send
         auto send = CCMenuItemSpriteExtra::create(CCSprite::createWithSpriteFrameName("GJ_redoBtn_001.png"), this, menu_selector(SerialPortMonitor::write));
         // copy
-        auto copy = CCMenuItemSpriteExtra::create(CCSprite::createWithSpriteFrameName("geode.loader/file.png"), this, menu_selector(SerialPortMonitor::copy));
+        auto copySprite = CircleButtonSprite::createWithSpriteFrameName("copy.png"_spr);
+        auto copy = CCMenuItemSpriteExtra::create(copySprite, this, menu_selector(SerialPortMonitor::copy));
         // input
         auto input = TextInput::create(m_mainLayer->getContentWidth() / 2, "Enter message here...", "bigFont.fnt");
         input->setID("input");
@@ -74,7 +76,6 @@ protected:
     }
 
     void onClose(CCObject* sender) {
-        log::info("closed monitor");
         m_listening = false;
         geode::Popup::onClose(sender);
     }
