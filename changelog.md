@@ -1,3 +1,6 @@
+# 1.1.1
+- (almost) All sprites now have the same golden look
+
 # 1.1.0
 
 - `Arduino::read()` now just reads file and doesnt wait `WaitCommEvent()`
